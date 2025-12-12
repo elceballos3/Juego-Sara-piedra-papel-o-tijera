@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Piedra Papel o Tijera</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background: #f0f0f0;
+        padding: 30px;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    .opciones button {
+        font-size: 20px;
+        padding: 15px 25px;
+        margin: 10px;
+        cursor: pointer;
+        border: none;
+        border-radius: 8px;
+        transition: 0.2s;
+    }
+
+    .opciones button:hover {
+        transform: scale(1.1);
+        background: #ddd;
+    }
+
+    #resultado {
+        font-size: 24px;
+        margin-top: 25px;
+        font-weight: bold;
+    }
+
+    #marcador {
+        margin-top: 20px;
+        font-size: 20px;
+    }
+</style>
+</head>
+<body>
+
+<h1>✊ Piedra – 📄 Papel – ✂️ Tijera</h1>
+
+<div class="opciones">
+    <button onclick="jugar('piedra')">✊ Piedra</button>
+    <button onclick="jugar('papel')">📄 Papel</button>
+    <button onclick="jugar('tijera')">✂️ Tijera</button>
+</div>
+
+<div id="resultado"></div>
+<div id="marcador">Jugador: 0 | CPU: 0</div>
+
+<script>
+    let puntosJugador = 0;
+    let puntosCPU = 0;
+
+    function jugar(eleccionJugador) {
+        const opciones = ["piedra", "papel", "tijera"];
+        const eleccionCPU = opciones[Math.floor(Math.random() * 3)];
+
+        let resultado = "";
+
+        if (eleccionJugador === eleccionCPU) {
+            resultado = "¡Empate!";
+        } else if (
+            (eleccionJugador === "piedra" && eleccionCPU === "tijera") ||
+            (eleccionJugador === "papel" && eleccionCPU === "piedra") ||
+            (eleccionJugador === "tijera" && eleccionCPU === "papel")
+        ) {
+            resultado = "¡Ganaste! 🎉";
+            puntosJugador++;
+        } else {
+            resultado = "Perdiste 😢";
+            puntosCPU++;
+        }
+
+        document.getElementById("resultado").innerHTML =
+            `Elegiste: <b>${eleccionJugador}</b> | CPU eligió: <b>${eleccionCPU}</b><br>${resultado}`;
+
+        document.getElementById("marcador").innerHTML =
+            `Jugador: ${puntosJugador} | CPU: ${puntosCPU}`;
+    }
+</script>
+
+</body>
+</html>
